@@ -26,7 +26,16 @@
       }
       function addBook() {
         myLibrary.push(x);
-        drawLib();
+        drawNew();
+      }
+
+      
+
+      function drawNew() {
+        const shelves = document.getElementById('shelves');
+        book = document.createElement('div');
+        book.innerHTML = myLibrary[myLibrary.length -1];
+        shelves.appendChild(book);
       }
 
       function drawLib() {
@@ -36,12 +45,12 @@
           book = document.createElement('div');
           book.innerHTML = myLibrary[i];
           shelves.appendChild(book);
-          
           i++;
         }
       }
 
     </script>
+
     <div id="shelves"></div>
   </main>
 </body>
