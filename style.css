@@ -2,7 +2,50 @@ html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.container {
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+#shelves {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60vw;
+}
+
+.spine {
+  width: 5em;
+  height: 10em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  margin: .5em;
+  color: gold;
+  background-color: rgb(4, 65, 4);
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom {
   display: flex;
   justify-content: center;
   align-items: center;
