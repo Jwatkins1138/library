@@ -45,6 +45,15 @@
         const shelves = document.getElementById('shelves');
         let spine = document.createElement('div');
         spine.classList.add('spine');
+        let styleRoll = Math.random();
+          if (styleRoll < .33) {
+            spine.classList.add('first-style');
+          } else if (styleRoll < .66 ) {
+            spine.classList.add('second-style');
+          } else {
+            spine.classList.add('third-style');
+          }
+        
         let top = document.createElement('div');
         top.classList.add('top');
         let bottom = document.createElement('div');
