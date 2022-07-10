@@ -38,6 +38,10 @@ body {
   
 }
 
+.read {
+  border: 2px solid orangered;
+}
+
 .first-style {
   color: gold;
   background-color: rgb(4, 65, 4);

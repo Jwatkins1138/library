@@ -16,14 +16,40 @@
       title: <input type='text' name="title" onKeyUp="formChanged()" onChange="formChanged()" ><br>
       author: <input type='text' name="author" onKeyUp="formChanged()" onChange="formChanged()" ><br>
       <!-- page count: <input type='text' name="pageCount" onKeyUp="formChanged()" onChange="formChanged()" ><br> -->
-      <input type="button" onclick="addBook()" value="submit"> 
+      <input type="button" onclick="addBook()" value="submit">
+      <input type="button" onclick="eraseLib()" value="erase">
+      <input type="button" onclick="drawLib()" value="draw">
+      <input type="button" onclick="libInfo()" value="info">
+      <input type="button" onclick="toggleAll()" value="togg">
+      <input type="button" onclick="addClicker()" value="clicks">
+      <input type="button" onclick="myLibrary[0].toggleRead()" value="toggone">      
     </form>
     <script>
       let myLibrary = [];
 
-      function Book(title, author) {
+      function Book(title, author, read = false) {
         this.title = title;
-        this.author = author; 
+        this.author = author;
+        this.read = read; 
+        this.toggleRead = function() {
+          console.log(this);
+          console.log(this.author);
+          author = 'testing';
+          console.log(this.author);
+          console.log(this.read)
+          if (this.read == false) {
+            this.read = true;
+            console.log(this.title + 'has been read');
+          } else {
+            this.read = false;
+            console.log(this.title + 'has not been read');
+          }
+        }
+        this.info = function() {
+          console.log(this.title);
+          console.log(this.author);
+          console.log(this.read);
+        }
       }
 
       function formChanged() {
@@ -33,18 +59,48 @@
         console.log(title);
         console.log(author);
       }
+
       function addBook() {
-        book = new Book(title, author)
+        var book = new Book(title, author)
         myLibrary.push(book);
         drawNew();
       }
 
+      function Spine(ref) {
+        this.id = id
+        function toggleSpine(id) {
+        console.log('togglin');
+        console.log(id);
+        var spine = document.getElementById(id);
+        if (spine.classList.contains('read')) {
+          spine.classList.remove('read');
+        } else {  
+        spine.classList.add('read');
+        }
+      }
       
+    }
+
+      function libInfo() {
+        myLibrary.forEach(book => {
+          book.info();
+        })
+      }
 
       function drawNew() {
+        let index = myLibrary.length -1;
+        let book = myLibrary[index];
         const shelves = document.getElementById('shelves');
         let spine = document.createElement('div');
+        spine.id = index;
         spine.classList.add('spine');
+        if (book.read == true) {
+          console.log('read');
+          spine.classList.add('read');
+        } else {
+          console.log('unread');
+          spine.classList.remove('read');
+        }
         let styleRoll = Math.random();
           if (styleRoll < .33) {
             spine.classList.add('first-style');
@@ -56,22 +112,101 @@
         
         let top = document.createElement('div');
         top.classList.add('top');
+        let readBtn = document.createElement('input');
+        readBtn.type = 'button';
+        // readBtn.onclick = book.toggleRead;
+        readBtn.value = 'test';
+        // readBtn.id = (myLibrary.length -1);
         let bottom = document.createElement('div');
         bottom.classList.add('bottom');
         spine.appendChild(top);
+        spine.appendChild(readBtn);
+        console.log(index);
+        console.log(book);
+        readBtn.addEventListener('click', book.toggleRead.bind(book), false);
+        readBtn.addEventListener('click', book.info.bind(book), false);
+        // readBtn.addEventListener('click', spine.classList.add.bind(spine).('read'), false);
         spine.appendChild(bottom);
-        top.innerHTML = myLibrary[myLibrary.length -1].title;
-        bottom.innerHTML = myLibrary[myLibrary.length -1].author;
+        top.innerHTML = book.title;
+        bottom.innerHTML = book.author;
         shelves.appendChild(spine);
+        
+      }
+
+      function buttons() {
+        document.querySelectorAll('.btn').forEach(readBtn => {
+          readBtn.addEventListener('click', myLibrary[readBtn.id].toggleRead);
+          readBtn.addEventListener('click', console.log(readBtn.id));
+          // readBtn.addEventListener('click', toggleSpine(readBtn.id));
+        })
+      }
+
+      function addClicker() {
+        document.querySelectorAll('.spine').forEach(item => {
+          item.addEventListener('click', toggleAll);
+        })
+      }
+
+      function eraseLib() {
+        document.querySelectorAll('.spine').forEach(item => {
+          item.remove();
+        })
+      }
+
+      function toggleAll() {
+        console.log('togllinall');
+        myLibrary.forEach(book => {
+          book.toggleRead();
+        })
+      }
+
+      function toggleBook(index) {
+        var book = myLibrary[index];
+        console.log(index);
+        console.log(book);
+        book.toggleRead();
+      }
+      
+      function eraseSpine(id) {
+        document.getElementById(id).remove; 
       }
 
       function drawLib() {
         i = 0;
         const shelves = document.getElementById('shelves');
         while (i < myLibrary.length) {
-          book = document.createElement('div');
-          book.innerHTML = myLibrary[i];
-          shelves.appendChild(book);
+          let book = myLibrary[i];
+          const shelves = document.getElementById('shelves');
+          let spine = document.createElement('div');
+          spine.classList.add('spine');
+          if (book.read == true) {
+            console.log('read');
+            spine.classList.add('read');
+          } else {
+            console.log('unread');
+            spine.classList.remove('read');
+          }
+          let styleRoll = Math.random();
+            if (styleRoll < .33) {
+              spine.classList.add('first-style');
+            } else if (styleRoll < .66 ) {
+              spine.classList.add('second-style');
+            } else {
+              spine.classList.add('third-style');
+            }
+        
+          let top = document.createElement('div');
+          top.classList.add('top');
+          let readBtn = document.createElement('button');
+          let bottom = document.createElement('div');
+          bottom.classList.add('bottom');
+          spine.appendChild(top);
+          spine.appendChild(readBtn);
+          readBtn.addEventListener('click', book.toggleRead);
+          spine.appendChild(bottom);
+          top.innerHTML = book.title;
+          bottom.innerHTML = book.author;
+          shelves.appendChild(spine);
           i++;
         }
       }
