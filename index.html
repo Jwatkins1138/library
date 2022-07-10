@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,31 +8,51 @@
   <link rel="stylesheet" href="style.css">
   <title>Library</title>
 </head>
+
 <body>
   <header id="head" class="container">
-    <h1 class="has-text-primary">library</h1>
+    <div id='title'><h1 class="has-text-primary">library</h1>
+      <p><div id="count"></div></p>
+    </div>
+    <div id="modal" class="modal">
+      <form id="book-input">
+        title: <input type='text' name="title" onKeyUp="formChanged()" onChange="formChanged()"><br>
+        author: <input type='text' name="author" onKeyUp="formChanged()" onChange="formChanged()"><br>
+        <input type="button" onclick="addBook(), showModal(), updateCount()" value="submit">
+      </form>
+    </div>
+    <form id="add-book">
+      <input type="button" onclick="showModal()" value="add book">
+    </form>
+    <div id="head-right"></div>
   </header>
   <main id="main" class="container">
-    <form id="book-input">
-      title: <input type='text' name="title" onKeyUp="formChanged()" onChange="formChanged()" ><br>
-      author: <input type='text' name="author" onKeyUp="formChanged()" onChange="formChanged()" ><br>
-      <!-- page count: <input type='text' name="pageCount" onKeyUp="formChanged()" onChange="formChanged()" ><br> -->
-      <input type="button" onclick="addBook()" value="submit">
-      <input type="button" onclick="eraseLib()" value="erase">
-      <input type="button" onclick="drawLib()" value="draw">
-      <input type="button" onclick="libInfo()" value="info">
-      <input type="button" onclick="toggleAll()" value="togg">
-      <input type="button" onclick="addClicker()" value="clicks">
-      <input type="button" onclick="myLibrary[0].toggleRead()" value="toggone">      
-    </form>
     <script>
       let myLibrary = [];
+
+      var modal = document.getElementById("modal");
+      function showModal() {
+        if (modal.classList.contains("show")) {
+          modal.classList.remove("show");
+          modal.classList.add("hide");
+        } else {
+          modal.classList.add("show");
+          modal.classList.remove("hide");
+        }
+      }
+
+      var collection = document.getElementById("count");
+      function updateCount() {
+        collection.innerHTML = "books: " + myLibrary.length;
+      }
+      
+      updateCount();
 
       function Book(title, author, read = false) {
         this.title = title;
         this.author = author;
-        this.read = read; 
-        this.toggleRead = function() {
+        this.read = read;
+        this.toggleRead = function () {
           console.log(this);
           console.log(this.author);
           author = 'testing';
@@ -45,7 +66,7 @@
             console.log(this.title + 'has not been read');
           }
         }
-        this.info = function() {
+        this.info = function () {
           console.log(this.title);
           console.log(this.author);
           console.log(this.read);
@@ -69,17 +90,17 @@
       function Spine(ref) {
         this.id = id
         function toggleSpine(id) {
-        console.log('togglin');
-        console.log(id);
-        var spine = document.getElementById(id);
-        if (spine.classList.contains('read')) {
-          spine.classList.remove('read');
-        } else {  
-        spine.classList.add('read');
+          console.log('togglin');
+          console.log(id);
+          var spine = document.getElementById(id);
+          if (spine.classList.contains('read')) {
+            spine.classList.remove('read');
+          } else {
+            spine.classList.add('read');
+          }
         }
+
       }
-      
-    }
 
       function libInfo() {
         myLibrary.forEach(book => {
@@ -88,7 +109,7 @@
       }
 
       function drawNew() {
-        let index = myLibrary.length -1;
+        let index = myLibrary.length - 1;
         let book = myLibrary[index];
         const shelves = document.getElementById('shelves');
         let spine = document.createElement('div');
@@ -102,14 +123,14 @@
           spine.classList.remove('read');
         }
         let styleRoll = Math.random();
-          if (styleRoll < .33) {
-            spine.classList.add('first-style');
-          } else if (styleRoll < .66 ) {
-            spine.classList.add('second-style');
-          } else {
-            spine.classList.add('third-style');
-          }
-        
+        if (styleRoll < .33) {
+          spine.classList.add('first-style');
+        } else if (styleRoll < .66) {
+          spine.classList.add('second-style');
+        } else {
+          spine.classList.add('third-style');
+        }
+
         let top = document.createElement('div');
         top.classList.add('top');
         let readBtn = document.createElement('input');
@@ -124,13 +145,13 @@
         console.log(index);
         console.log(book);
         readBtn.addEventListener('click', book.toggleRead.bind(book), false);
-        readBtn.addEventListener('click', book.info.bind(book), false);
+        spine.addEventListener('click', book.info.bind(book), false);
         // readBtn.addEventListener('click', spine.classList.add.bind(spine).('read'), false);
         spine.appendChild(bottom);
         top.innerHTML = book.title;
         bottom.innerHTML = book.author;
         shelves.appendChild(spine);
-        
+
       }
 
       function buttons() {
@@ -166,9 +187,9 @@
         console.log(book);
         book.toggleRead();
       }
-      
+
       function eraseSpine(id) {
-        document.getElementById(id).remove; 
+        document.getElementById(id).remove;
       }
 
       function drawLib() {
@@ -187,14 +208,14 @@
             spine.classList.remove('read');
           }
           let styleRoll = Math.random();
-            if (styleRoll < .33) {
-              spine.classList.add('first-style');
-            } else if (styleRoll < .66 ) {
-              spine.classList.add('second-style');
-            } else {
-              spine.classList.add('third-style');
-            }
-        
+          if (styleRoll < .33) {
+            spine.classList.add('first-style');
+          } else if (styleRoll < .66) {
+            spine.classList.add('second-style');
+          } else {
+            spine.classList.add('third-style');
+          }
+
           let top = document.createElement('div');
           top.classList.add('top');
           let readBtn = document.createElement('button');
@@ -214,6 +235,8 @@
     </script>
 
     <div id="shelves"></div>
+    
   </main>
 </body>
+
 </html>

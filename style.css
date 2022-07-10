@@ -6,7 +6,54 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   width: 100vw;
+}
+
+.modal {
+  position: absolute;
+  width: 16rem;
+  height: 10rem;
+  border: 2px solid black;
+  background: white;
+  display: none;
+  transition: border 3s ease-in; 
+}
+
+.modal.hide {
+  border: 1px solid green;
+  transition: border 3s ease-in;
+}
+
+.modal.show {
+  border: 4px solid red;
+  display: block;
+  transform: translateY(100%);
+  transition: border 3s ease-in;
+}
+
+#head-right {
+  width: 8em;
+}
+
+#head {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+}
+
+#title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-book {
+  margin-left: 15em;
+  margin-right: 15em;
 }
 
 #main {
