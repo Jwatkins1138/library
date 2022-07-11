@@ -8,6 +8,8 @@ body {
   align-items: center;
   justify-content: flex-start;
   width: 100vw;
+  height: 100vh;
+  background: radial-gradient(at top left, orange, yellow);
 }
 
 
@@ -43,6 +45,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#header {
+  background: white;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  border-bottom: 2px solid rgb(0, 0, 0, .3);
 }
 
 #head-right {
@@ -90,14 +100,16 @@ input[type=button]:hover {
 
 #main {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  
 }
 
-/* .container {
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+  flex-direction: column;
+}
 
 #shelves {
   display: flex;

@@ -10,39 +10,42 @@
 </head>
 
 <body>
-  <header id="head" class="container">
-    <div id='title'>
-      <h1 class="title">library</h1>
-      <p class="subtitle">
-      <div id="count"></div>
-      </p>
-    </div>
-    <div id="modal" class="modal">
-      <form id="book-input">
-        <label for="title">title</label></br>
-        <input type='text' name="title" onKeyUp="formChanged()" onChange="formChanged()"><br>
-        <label for="author">author</label></br>
-        <input type='text' name="author" onKeyUp="formChanged()" onChange="formChanged()"><br>
-        <label for="pages">pages</label></br>
-        <input type='number' name="pages" onKeyUp="formChanged()" onChange="formChanged()"><br>
-      </form>
-      <div class="footer">
-        <input type="button" onclick="addBook(), showModal(), updateCount()" value="submit">
-        <!-- test button -->
-        <!-- <input type="button" onclick="libInfo()" value="info"> -->
+  <header id="header">
+    <div id="head">
+      <div id='title'>
+        <h1 class="title">library</h1>
+        <p class="subtitle">
+        <div id="count"></div>
+        </p>
       </div>
-    </div>
-    <form id="add-book">
-      <input type="button" onclick="showModal()" value="add book">
-    </form>
-    <div id="head-right"></div>
+      <div id="modal" class="modal">
+        <form id="book-input">
+          <label for="title">title</label></br>
+          <input type='text' name="title" onKeyUp="formChanged()" onChange="formChanged()"><br>
+          <label for="author">author</label></br>
+          <input type='text' name="author" onKeyUp="formChanged()" onChange="formChanged()"><br>
+          <label for="pages">pages</label></br>
+          <input type='number' name="pages" onKeyUp="formChanged()" onChange="formChanged()"><br>
+        </form>
+        <div class="footer">
+          <input type="button" onclick="addBook(), showModal(), updateCount()" value="submit">
+          <!-- test button -->
+          <!-- <input type="button" onclick="libInfo()" value="info"> -->
+        </div>
+      </div>
+      <form id="add-book">
+        <input type="button" onclick="showModal()" value="add book">
+      </form>
+      <div id="head-right"></div>
+    </div>  
   </header>
-  <main id="main" class="container">
-    <script src="script.js">
-    </script>
+  <main id="main">
+    <div class="container">
+      <script src="script.js">
+      </script>
 
-    <div id="shelves"></div>
-
+      <div id="shelves"></div>
+    </div>
   </main>
 </body>
 
