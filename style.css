@@ -10,26 +10,39 @@ body {
   width: 100vw;
 }
 
+
+
 .modal {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 16rem;
   height: 10rem;
-  border: 2px solid black;
-  background: white;
-  display: none;
-  transition: border 3s ease-in; 
+  padding: 1em;
+  border-bottom: 1px solid rgb(0, 0, 0, .3);
+  border-right: 1px solid rgb(0, 0, 0, .3);
+  border-radius: 2px;
+  background: beige;
+  color: black;
+  opacity: 0%;
+  transform: none;
+  transition: transform .5s ease-in, opacity .5s ease-in; 
+  pointer-events: none;
 }
 
-.modal.hide {
-  border: 1px solid green;
-  transition: border 3s ease-in;
-}
+
 
 .modal.show {
-  border: 4px solid red;
-  display: block;
-  transform: translateY(100%);
-  transition: border 3s ease-in;
+  opacity: 100%;
+  transform: translateY(80%);
+  pointer-events: all;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #head-right {
@@ -51,9 +64,28 @@ body {
   align-items: center;
 }
 
+.title {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.subtitle {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
 #add-book {
-  margin-left: 15em;
-  margin-right: 15em;
+  width: 30em;
+  display: flex;
+}
+
+input[type=button] {
+  border: none;
+  background: none;
+}
+
+input[type=button]:hover {
+  background: rgb(128, 128, 0, .3);
 }
 
 #main {
@@ -82,7 +114,9 @@ body {
   align-items: center;
   padding: 1em;
   margin: .5em;
-  
+  border-bottom: 2px solid rgb(0, 0, 0, .3);
+  border-right: 2px solid rgb(0, 0, 0, .3);
+  border-radius: 5%;
 }
 
 .read {
@@ -111,6 +145,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-bottom: 1px solid rgb(0, 0, 0, .3);
 }
 
 .bottom {
@@ -118,5 +153,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-top: 1px solid rgb(0, 0, 0, .3);
 }
 
